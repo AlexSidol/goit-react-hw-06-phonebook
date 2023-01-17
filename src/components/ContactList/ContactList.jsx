@@ -8,17 +8,18 @@ import { selectContacts, selectFilter } from 'redux/selectors';
 const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
-
-  // const visibleContacts = contacts.filter(contact => {
-  //
-  //   return contact.name.toLowerCase().includes(filter.toLowerCase());
-  // });
-
-  const visibleContacts = contacts.filter(contact => {
-    return contact.name.toLowerCase().includes(filter.toLowerCase());
-  });
-
   const dispatch = useDispatch();
+
+  const getVisibleContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  const visibleContacts = getVisibleContacts();
+
   return (
     <ul className={css.contacts}>
       {visibleContacts.map(({ id, name, number }) => (
