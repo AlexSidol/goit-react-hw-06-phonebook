@@ -1,14 +1,13 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from 'redux/contactsSlice';
+import { selectContacts, selectFilter } from 'redux/selectors';
 
 const ContactList = () => {
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state => state.filters);
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
   const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
@@ -35,10 +34,6 @@ const ContactList = () => {
       ))}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.array,
 };
 
 export default ContactList;
