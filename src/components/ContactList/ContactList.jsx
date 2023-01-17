@@ -9,9 +9,14 @@ const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
 
-  const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  // const visibleContacts = contacts.filter(contact => {
+  //
+  //   return contact.name.toLowerCase().includes(filter.toLowerCase());
+  // });
+
+  const visibleContacts = contacts.filter(contact => {
+    return contact.name.toLowerCase().includes(filter.toLowerCase());
+  });
 
   const dispatch = useDispatch();
   return (
